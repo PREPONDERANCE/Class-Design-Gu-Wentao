@@ -100,6 +100,7 @@ void ReadFile(SqList &L, string filename){
     }
     
     L.length += 1;
+    inputFile.close();
 }
 
 void copy(Food* dst, Food* src){
@@ -122,22 +123,25 @@ void copy(Food* dst, Food* src){
 void MSDSort(SqList& L, SqList& L2, int l, int r, int d) {
     if( r <= l ) return;
     
-    int count[256+2]; for(int i = 0; i != 258; i++) count[i] = 0;
+    int count[257]; for(int i = 0; i != 257; i++) count[i] = 0;
     
     for(int i = l; i <= r; i++)
-        count[L.elem[i].sname[d]+2] += 1;
+        count[L.elem[i].sname[d]] += 1;
     
-    for(int i = 0; i < 256+1; i++)
-        count[i+1] += count[i];
+    for(int i = 1; i != 257; i++)
+        count[i] += count[i-1];
     
-    for(int i = l; i <= r; i++)
-        L2.elem[count[L.elem[i].sname[d]+1]++] = L.elem[i];
+    for(int i = l; i <= r; i++){
+        L2.elem[count[L.elem[i].sname[d]]-1] = L.elem[i];
+        count[L.elem[i].sname[d]] -= 1;
+    }
     
     for(int i = l; i <= r; i++)
         L.elem[i] = L2.elem[i-l];
     
     for(int i = 0; i != 256; i++)
         MSDSort(L, L2, l+count[i], l+count[i+1]-1, d+1);
+    
 }
 
 

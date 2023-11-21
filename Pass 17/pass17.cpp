@@ -99,13 +99,9 @@ void ReadFile(SqList &L, string filename){
 		}
 	}
 	
-//	L.length += 1;
 }
 
 int Partition(SqList& L, int low, int high, int& kcn, int& rmn) {
-	// 对顺序表中的子表elem[low..high]进行一趟排序，返回枢轴位置
-	// 用子表的第一个记录做枢轴记录
-	// 注：L.elem[0]用来存枢轴记录
 	strcpy(L.elem[0].sname, L.elem[low].sname); rmn += 1;
 	while (low < high) {
 		while( high > low && strcmp(L.elem[high].sname, L.elem[0].sname) >= 0) {

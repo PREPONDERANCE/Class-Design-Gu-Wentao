@@ -40,24 +40,6 @@ bool RelationExtraction(char *text, char *entity1, char *entity2, Relation *r){
 	string target_text = string(text, text + strlen(text));
 	string entity_one = string(entity1, entity1 + strlen(entity1));
 	string entity_two = string(entity2, entity2 + strlen(entity2));
-//	
-//	int entity1_pos = BF(target_text, entity_one);
-//	int entity2_pos = BF(target_text, entity_two);
-//	if( entity1_pos >= target_text.length() || entity2_pos >= target_text.length() ) return false;
-//	
-//	string relation = target_text.substr(entity1_pos, entity2_pos - entity1_pos);
-//	
-//	for(int i = 0; i != 4; i++)
-//		for(int j = 0; r[i].relation != ""; j++){
-//			auto end = std::find(r[i].rule[j].begin(), r[i].rule[j].end(), 'B');
-//			auto beg = r[i].rule[j].begin()+1;
-//			string cmp = string(beg, end);
-//			
-//			if( cmp == relation ){
-//				cout << entity1 << "——" << relation << "——" << entity2 << endl;
-//				return true;
-//			}
-//		}
 	
 	int k = 0;
 	while( k < target_text.length() ){

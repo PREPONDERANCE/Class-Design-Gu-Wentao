@@ -94,18 +94,41 @@ void CreateUDG(ALGraph& G, string filename) {
 	inputFile.close();
 }
 
-bool recipeExist(ALGraph& G, int v){
-	ArcNode* head = G.vertices[v].firstarc;
-	while( head ){
-		if( head->relationship == 1 ) return true;
-		head = head->nextarc;
-	}
-	return false;
-}
-
 void DFS(ALGraph& G, int i, bool visited[], string path, int level) {
 // 深度优先搜索多跳问答路径，i为输入的证机概要在AdjList中的下标，path为问答路径
 // 函数可增加额外的参数
+//	if( G.vertices[i].entity == 3 ){
+//		cout << path << endl;
+//		return;
+//	}
+//	
+//	ArcNode* head = G.vertices[i].firstarc;
+//	bool flag = false;
+//	
+//	while( head ){
+//		if( level == 1 ){
+//			if( head->relationship == 3 ){
+//				DFS(G, LocateVex(G, G.vertices[head->adjvex].info), visited, path + "->" + G.vertices[head->adjvex].info, level+1);
+//				flag = true;
+//			}
+//		}else if( level == 2 ){
+//			if( head->relationship == 2 ){
+//				DFS(G, LocateVex(G, G.vertices[head->adjvex].info), visited, path + "->" 
+//					+ G.vertices[head->adjvex].info, level+1);
+//				flag = true;
+//			}
+//		}else{
+//			if( head->relationship == 1 ){
+//				DFS(G, LocateVex(G, G.vertices[head->adjvex].info), visited, path + "->" + G.vertices[head->adjvex].info, level+1);
+//				flag = true;
+//			}
+//		}
+//		head = head->nextarc;
+//	}
+//	
+//	if( !flag ) cout << path << endl;
+	
+	
 	if( G.vertices[i].entity == 3 ){
 		cout << path << endl;
 		return;
@@ -122,8 +145,7 @@ void DFS(ALGraph& G, int i, bool visited[], string path, int level) {
 			}
 		}else if( level == 2 ){
 			if( head->relationship == 2 ){
-				DFS(G, LocateVex(G, G.vertices[head->adjvex].info), visited, path + "->" 
-					+ G.vertices[head->adjvex].info, level+1);
+				DFS(G, LocateVex(G, G.vertices[head->adjvex].info), visited, path + "->" + G.vertices[head->adjvex].info, level+1);
 				flag = true;
 			}
 		}else{
@@ -132,6 +154,7 @@ void DFS(ALGraph& G, int i, bool visited[], string path, int level) {
 				flag = true;
 			}
 		}
+		
 		head = head->nextarc;
 	}
 	

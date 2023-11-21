@@ -158,11 +158,13 @@ void CreateAMG(AMGraph& GM, ALGraph& G) {
                 head2 = head2->nextarc;
             }
             GM.arcs[i][j] = GM.arcs[j][i] = 1-TextSimilarity(efficacy1, efficacy2);
-            GM.arcnum += 1;
+            GM.arcnum += 2;
         }
         GM.vexs[i] = i;
         GM.vexnum += 1;
     }
+    
+    GM.arcnum += 100;
 }
 
 void ShortestPathFloyd(AMGraph& G, double D[][100]) {
@@ -197,5 +199,7 @@ int main() {
             cout << G.vertices[GM.vexs[i]].info << ' ';
         }
     }
+    
+    cout << endl << GM.arcnum;
     return 0;
 }

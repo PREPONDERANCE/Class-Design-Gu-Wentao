@@ -168,8 +168,26 @@ int size(BSTree T){
 
 int GetSumCmp(BSTree T, int sumCmp){
 	// 统计查找成功时的总比较次数
+//	int l = 0, r = 0, level = 1;
+//	BSTNode* queue[size(T)];
+//	queue[r] = T;
+//	
+//	while( r >= l ){
+//		int currWidth = r-l+1;
+//		sumCmp += level * currWidth;
+//		
+//		int temp = r;
+//		for(int i = l; i <= temp; i++){
+//			BSTNode* node = queue[l++];
+//			if( node->lchild ) queue[++r] = node->lchild;
+//			if( node->rchild ) queue[++r] = node->rchild;
+//		}
+//		
+//		level += 1;
+//	}
+	
 	int l = 0, r = 0, level = 1;
-	BSTNode* queue[size(T)];
+	BSTNode* queue[MAXSIZE];
 	queue[r] = T;
 	
 	while( r >= l ){
@@ -177,7 +195,7 @@ int GetSumCmp(BSTree T, int sumCmp){
 		sumCmp += level * currWidth;
 		
 		int temp = r;
-		for(int i = l; i <= temp; i++){
+		for(int i = l; i != temp; i++){
 			BSTNode* node = queue[l++];
 			if( node->lchild ) queue[++r] = node->lchild;
 			if( node->rchild ) queue[++r] = node->rchild;

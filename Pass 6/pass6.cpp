@@ -33,14 +33,12 @@ void InitList(SqList &L){
 }
 
 void FreeList(SqList &L){
-	// 释放内存
 	delete[] L.elem;
 	L.length = 0;
 	
 }
 
 void ReadFile(SqList &L, string filename){
-	// 从文件中读取食材信息，将其按顺序存入L.elem指向的数组中
 	InitList(L);
 	
 	string line; int count = 0;

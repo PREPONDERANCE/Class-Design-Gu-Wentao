@@ -107,21 +107,22 @@ void BInsertSort(SqList &L, int &kcn, int &rmn){
 // 注：L.elem[0]用做哨兵单元
 // 输出排序后的食材英文名称、KCN和RMN
 	for(int i = 2; i != L.length; i++){
-		strcpy(L.elem[0].sname, L.elem[i].sname); rmn += 1;
-		int low = 1, high = i-1;
+		L.elem[0] = L.elem[i]; rmn += 1;
+		int l = 1, r = i-1;
 		
-		while( low <= high ){
-			int m = (low + high) / 2;
-			if( strcmp(L.elem[0].sname, L.elem[m].sname) < 0 ) high = m-1;
-			else low = m+1;
+		while( l <= r ){
+			int m = (l+r) / 2;
+			if( strcmp(L.elem[0].sname, L.elem[m].sname) < 0 ) r = m-1;
+			else l = m+1;
 			kcn += 1;
 		}
 		
-		for(int j = i-1; j >= high+1; j--){
-			strcpy(L.elem[j+1].sname, L.elem[j].sname);
+		for(int j = i-1; j >= r+1; j--){
+			L.elem[j+1] = L.elem[j];
 			rmn += 1;
 		}
-		strcpy(L.elem[high+1].sname, L.elem[0].sname); rmn += 1;
+		
+		L.elem[r+1] = L.elem[0];
 	}
 	
 	for(int i = 1; i != L.length; i++) cout << L.elem[i].sname << endl;
